@@ -6,9 +6,7 @@ export const TodoList = () => {
 
 	return (
 		<ul
-			className="relative max-h-h-5 overflow-y-auto overflow-x-hidden
-      rounded-t-lg dark:bg-dm-VDDesatBlue scrollbar"
-		>
+			className="dark:bg-very-dark-desaturated-blue bg-very-light-gray w-[92vw] max-w-md rounded-t-lg overflow-scroll max-h-[16.8rem]">
 			{todos.map(todo => <TodoItem key={todo.id} todo={todo} />)}
 		</ul>
 	)

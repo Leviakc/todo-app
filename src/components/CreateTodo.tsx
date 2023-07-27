@@ -1,54 +1,54 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Todo } from "../type";
 import { useTodos } from "../hooks/useTodo";
+import { InputTodo } from "./InputTodo";
 
 export const CreateTodo = () => {
-	const [inputValue, setInputValue] = useState<string>("");
-	const { handleNewTodo } = useTodos()
+  const [inputValue, setInputValue] = useState<string>("");
+  const { handleNewTodo } = useTodos();
 
-	const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-		if (e.key === "Enter" && inputValue !== "") {
-			setInputValue("");
+  const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (inputValue.trim() === "") return;
 
-			const newTodo: Todo = {
-				id: crypto.randomUUID(),
-				title: inputValue,
-				completed: false,
-			};
+    const newTodo: Todo = {
+      id: crypto.randomUUID(),
+      title: inputValue,
+      completed: false,
+    };
 
-			handleNewTodo(newTodo)
-		}
-	};
-	const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setInputValue(e.target.value);
-	};
+    handleNewTodo(newTodo);
+    setInputValue("");
+  };
 
-	return (
-		<div className="flex flex-row justify-start items-center space-x-1 xs:space-x-3 md:space-x-4 lg:space-x-6 w-full px-2 py-2 lg:px-4 lg:py-3 bg-white dark:bg-dm-VDDesatBlue rounded-lg mb-8">
-			<div className="w-auto relative grid place-content-center">
-				<input
-					id="input-todo"
-					type="checkbox"
-					className="appearance-none rounded-full h-6 w-6 lg:h-10 lg:w-10 border-2 dark:border-dm-VDGBlue dark:transparent"
-				/>
-				<label htmlFor="input-todo" className="absolute top-0 -left-[99999px]">
-					Checkbox
-				</label>
-			</div>
-			<input
-				className="flex-grow px-1 py-1.5 text-base md:text-xl lg:px-2 lg:py-3 lg:text-2xl w-full dark:bg-transparent dark:text-slate-200 focus:outline-none"
-				type="text"
-				value={inputValue}
-				placeholder="Create a new todo"
-				onChange={onInputChange}
-				onKeyDown={handleKeyDown}
-			/>
-			<label
-				htmlFor="input-todo-text"
-				className="absolute top-0 -left-[99999px]"
-			>
-				Create a new todo
-			</label>
-		</div>
-	);
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  return (
+    <form
+      className="bg-very-light-gray dark:bg-very-dark-desaturated-blue w-[92vw] max-w-md flex mb-4 items-center gap-x-2 p-2.5 rounded-lg justify-between"
+      onSubmit={onFormSubmit}
+    >
+      <InputTodo onInputChange={onInputChange} inputValue={inputValue} />
+      <button
+        type="submit"
+				title="Add"
+        className="bg-dark-grayish-blue dark:bg-very-dark-grayish-blue text-very-light-grayish-blue text-sm p-1 rounded-lg"
+      >
+        <svg
+          stroke="currentColor"
+          fill="currentColor"
+          viewBox="0 0 448 512"
+          height="1em"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
+        </svg>
+      </button>
+    </form>
+  );
 };
+
+// onKeyDown={handleKeyDown}

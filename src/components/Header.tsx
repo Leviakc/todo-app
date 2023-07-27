@@ -9,9 +9,9 @@ const imgSrc = theme === "dark" ? "../../images/icon-sun.svg" : "../../images/ic
 const currentTheme = <img src={imgSrc} className="object-contain" />;
 
   return (
-    <header className="w-96 flex flex-col justify-center">
-      <div className="flex max-w-md  justify-between mb-12">
-        <h1 className="text-4xl uppercase tracking-[1.1rem] text-white font-bold">
+    <header className="flex flex-col justify-start w-[92vw] max-w-md">
+      <div className="flex max-w-md  justify-between mb-8">
+        <h1 className="text-2xl sm:text-4xl uppercase tracking-[1.1rem] text-white font-bold">
           Todo
         </h1>
         <button onClick={toggleTheme}>{currentTheme}</button>

@@ -14,6 +14,7 @@ export default {
 
         "very-light-gray": "hsl(0, 0%, 98%)",
         "very-light-grayish-blue": "hsl(236, 33%, 92%)",
+        "very-light-grayish-blue-alpha": "hsla(236, 33%, 92%, 0.2)",
         "light-grayish-blue": "hsl(233, 11%, 84%)",
         "dark-grayish-blue": "hsl(236, 9%, 61%)",
         "very-dark-grayish-blue": "hsl(235, 19%, 35%)",
@@ -23,6 +24,10 @@ export default {
         "light-grayish-blue-hover": "hsl(236, 33%, 92%)",
       },
       backgroundImage: {
+        "desktop-light": "url('./images/bg-desktop-light.jpg')",
+        "desktop-dark": "url('./images/bg-desktop-dark.jpg')",
+        "mobile-light": "url('./images/bg-mobile-light.jpg')",
+        "mobile-dark": "url('./images/bg-mobile-dark.jpg')",
         "theme-dark":
           "url('./images/bg-desktop-dark.jpg'), linear-gradient(hsl(235, 21%, 11%), hsl(235, 21%, 11%));",
         "theme-light":
@@ -31,6 +36,8 @@ export default {
           "url('./images/bg-mobile-light.jpg'), linear-gradient(hsl(0, 0%, 98%), hsl(0, 0%, 98%)",
         "theme-dark-mobile":
           "url('./images/bg-mobile-dark.jpg'), linear-gradient(hsl(235, 21%, 11%), hsl(235, 21%, 11%)",
+        checked:
+          "url('images/icon-check.svg'), linear-gradient(to right,hsl(192, 100%, 67%) , hsl(280, 87%, 65%))",
       },
     },
   },

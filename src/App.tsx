@@ -1,19 +1,19 @@
+import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { TodoList } from "./components/TodoList";
-import { useTodos } from "./hooks/useTodo";
 
 export const App = () => {
-  const { pendingTodosCount } = useTodos();
   return (
     <>
-      <div className="w-[100vw] h-[100vh] bg-theme-light dark:bg-theme-dark bg-contain bg-no-repeat grid justify-items-center items-center">
-        <div className="">
+      <div className="w-full h-[100vh] relative grid justify-items-center dark:bg-very-dark-blue bg-light-grayish-blue z-0">
+        <div className="absolute bg-mobile-light dark:bg-mobile-dark top-0 w-screen h-[30vh] bg-cover bg-no-repeat sm:h-1/3 sm:bg-theme-light sm:dark:bg-theme-dark"></div>
+        <div className="mt-10 w-[92vw] flex flex-col  items-center z-10">
           <Header />
           <TodoList />
-          <footer className="">{pendingTodosCount}</footer>
+					<Footer/>
         </div>
       </div>
     </>
   );
 };
-// bg-[url('./public/images/bg-desktop-light.jpg')] bg-no-repeat bg-cover dark:bg-[url('./public/images/bg-desktop-dark.jpg')]
+// bg-desktop-light dark:bg-very-dark-blue dark:bg-theme-dark dark:bg-[length:100vw_40%] bg-[length:100vw_40%]

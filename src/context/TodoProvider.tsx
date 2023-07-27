@@ -2,7 +2,7 @@ import { useEffect, useReducer } from "react";
 import { TodoContext } from "./TodoContext";
 import { todoReducer } from "../helpers/todoReducer";
 import { ACTION_TYPES } from "../consts";
-import { Todo, TodoId } from "../type";
+import { Todo,  TodoId } from "../type";
 
 interface TodoProviderProps {
   children: React.ReactNode;
@@ -36,10 +36,13 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
     dispatch(action);
   };
 
-  const handleToggleTodo = (id: TodoId) => {
+	
+  const handleToggleTodo = (id: string, completed: boolean ) => {
+		
+		console.log(id, completed);
     dispatch({
       type: ACTION_TYPES.TOGGLE,
-      payload: id,
+      payload: {id, completed}
     });
   };
 

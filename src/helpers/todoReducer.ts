@@ -10,16 +10,12 @@ export const todoReducer = (
       return [...initialState, action.payload];
     case ACTION_TYPES.REMOVE:
       return initialState.filter((todo) => todo.id !== action.payload.id);
-    case ACTION_TYPES.TOGGLE:
-      return initialState.map((todo) => {
-        if (todo.id === action.payload.id) {
-          return {
-            ...todo,
-            completed: !todo.completed,
-          };
-        }
-        return todo;
-      });
+    case ACTION_TYPES.TOGGLE: {
+      const { id, completed } = action.payload;
+      return initialState.map((todo) =>
+        todo.id === id ? { ...todo, completed } : todo,
+      );
+    }
     default:
       return initialState;
   }

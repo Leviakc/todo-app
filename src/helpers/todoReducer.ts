@@ -6,8 +6,6 @@ export const todoReducer = (
   action: ActionOptions,
 ): Todo[] => {
   switch (action.type) {
-    // TODO: verify the error: Property 'payload' does not exist...
-    // WARNING: verify the error: Property 'payload' does not exist...
     case ACTION_TYPES.ADD:
       return [...initialState, action.payload];
     case ACTION_TYPES.REMOVE:

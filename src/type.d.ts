@@ -13,7 +13,9 @@ export type ActionOptions =
   | { type: ACTION_TYPES.ADD; payload: Todo }
   | { type: ACTION_TYPES.REMOVE; payload: Todo.id }
   | { type: ACTION_TYPES.TOGGLE; payload: { id: string; completed: boolean } }
-  | { type: ACTION_TYPES.REMOVE_COMPLETED }
-  | { type: ACTION_TYPES.RE_ORDER_TODOS; payload: Todo[] };
+  | { type: ACTION_TYPES.RE_ORDER_TODOS; payload: Todo[] }
+  | { type: ACTION_TYPES.REMOVE_COMPLETED; payload?: undefined };
+// TODO: investigate this issue
+// | { type: ACTION_TYPES.REMOVE_COMPLETED; payload?: undefined };
 
 export type FilterValue = "all" | "active" | "completed";

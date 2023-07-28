@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { useTodos } from "../hooks/useTodo";
 import { Todo } from "../type";
 
@@ -20,7 +20,7 @@ export const TodoItem = ({
   const { id, completed } = todo;
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleSort = () => {
+const handleSort = () => {
     const newTodos = [...todos];
 
     if (dragItemRef.current === null) return;
@@ -52,19 +52,32 @@ export const TodoItem = ({
     handleSort();
   };
 
-  useEffect(() => {
-    const handleTouchMove = (e: TouchEvent) => {
-      if (isDragging) {
-        e.preventDefault();
-      }
-    };
+// Touch event handlers for mobile drag and drop
+  const handleTouchStart = () => {
+    setIsDragging(true);
+    dragItemRef.current = index;
+  };
 
-    document.addEventListener("touchmove", handleTouchMove, { passive: false });
+const handleTouchMove: React.TouchEventHandler<HTMLLIElement> = (e ) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    // Determine the current hovered item based on touch position
+    const { clientY } = e.touches[0];
+    const items = Array.from(document.querySelectorAll("li")); // Assuming each TodoItem is an li element
+    const hoveredIndex = items.findIndex((item) => {
+      const rect = item.getBoundingClientRect();
+      return clientY >= rect.top && clientY <= rect.bottom;
+    });
 
-    return () => {
-      document.removeEventListener("touchmove", handleTouchMove);
-    };
-  }, [isDragging]);
+    if (hoveredIndex !== -1 && dragItemRef.current !== hoveredIndex) {
+      dragOverItemRef.current = hoveredIndex;
+    }
+  };
+
+const handleTouchEnd = () => {
+    setIsDragging(false);
+    handleSort();
+  };
 
 
   return (
@@ -73,7 +86,10 @@ export const TodoItem = ({
       onDragStart={handleDragStart}
       onDragEnter={handleDragEnter}
       onDragEnd={handleDragEnd}
-      draggable
+ onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      draggable="true"
     >
       <input
         className={`dark:bg-very-dark-desaturated-blue bg-very-light-gray w-[20px]  lg:w-[26px] h-auto aspect-square rounded-full cursor-pointer appearance-none border-dark-grayish-blue dark:border-very-light-grayish-blue-alpha  ${

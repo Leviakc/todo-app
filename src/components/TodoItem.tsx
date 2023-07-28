@@ -33,7 +33,7 @@ export const TodoItem = ({
 
   return (
     <li
-      className={`bg-very-light-gray dark:bg-very-dark-desaturated-blue w-[92vw] max-w-full flex items-center gap-x-2 p-2.5 lg:p-3.5 justify-between border-light-grayish-blue border-solid border-b cursor-grab`}
+      className={`bg-very-light-gray dark:bg-very-dark-desaturated-blue w-[92vw] max-w-full flex items-center gap-x-2 p-2.5 lg:p-3.5 justify-between border-light-grayish-blue border-solid border-b cursor-grab [&>button]:opacity-0 [&>button]:hover:opacity-100`}
       key={id}
       onDragStart={() => (dragItemRef.current = index)}
       onDragEnter={() => (dragOverItemRef.current = index)}
@@ -60,7 +60,7 @@ export const TodoItem = ({
         {todo.title}
       </span>
       <button className="" onClick={() => handleDeleteTodo({ id })}>
-        <img src="../../images/icon-cross.svg" alt="" />
+        <img src="../../images/icon-cross.svg" alt="delete list" className="stroke-blue-200" />
       </button>
     </li>
   );

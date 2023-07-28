@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useTodos } from "../hooks/useTodo";
 import { Todo } from "../type";
 
@@ -17,7 +18,7 @@ export const TodoItem = ({
   const { handleDeleteTodo, handleToggleTodo, todos, handleReOrder } =
     useTodos();
   const { id, completed } = todo;
-
+  const [isDragging, setIsDragging] = useState(false);
   const handleSort = () => {
     const newTodos = structuredClone(todos);
 
@@ -33,16 +34,26 @@ export const TodoItem = ({
 
   return (
     <li
-      className={`bg-very-light-gray dark:bg-very-dark-desaturated-blue w-[92vw] max-w-full flex items-center gap-x-2 p-2.5 lg:p-3.5 justify-between border-light-grayish-blue border-solid border-b cursor-grab [&>button]:sm:opacity-0 [&>button]:hover:opacity-100 [&>button]:opacity-100`}
-      key={id}
-      onDragStart={() => (dragItemRef.current = index)}
+      className={`bg-very-light-gray dark:bg-very-dark-desaturated-blue w-[92vw] max-w-full flex items-center gap-x-2 p-2.5 lg:p-3.5 justify-between border-light-grayish-blue border-solid border-b cursor-grab [&>button]:sm:opacity-0 [&>button]:hover:opacity-100 [&>button]:opacity-100 ${ isDragging ? "border-dark-grayish-blue" : "border-light-grayish-blue" }`}
+      onDragStart={() => {
+        setIsDragging(true);
+        dragItemRef.current = index;
+      }}
+      onTouchStart={() => {
+        setIsDragging(true);
+        dragItemRef.current = index;
+      }}
       onDragEnter={() => (dragOverItemRef.current = index)}
-      onDragEnd={handleSort}
-      onDragOver={(e) => e.preventDefault()}
-			onTouchStart={() => dragItemRef.current = index}
-			onTouchMove={()=> dragOverItemRef.current = index}
-			onTouchEnd={handleSort}
-      draggable='true'
+      onTouchMove={() => (dragOverItemRef.current = index)}
+      onDragEnd={() => {
+        setIsDragging(false);
+        handleSort();
+      }}
+      onTouchEnd={() => {
+        setIsDragging(false);
+        handleSort();
+      }}
+      draggable="true"
     >
       <input
         className={`dark:bg-very-dark-desaturated-blue bg-very-light-gray w-[20px]  lg:w-[26px] h-auto aspect-square rounded-full cursor-pointer appearance-none border-dark-grayish-blue dark:border-very-light-grayish-blue-alpha  ${
@@ -63,7 +74,11 @@ export const TodoItem = ({
         {todo.title}
       </span>
       <button className="" onClick={() => handleDeleteTodo({ id })}>
-        <img src="../../images/icon-cross.svg" alt="delete list" className="stroke-blue-200" />
+        <img
+          src="../../images/icon-cross.svg"
+          alt="delete list"
+          className="stroke-blue-200"
+        />
       </button>
     </li>
   );

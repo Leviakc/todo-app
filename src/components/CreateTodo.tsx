@@ -27,14 +27,14 @@ export const CreateTodo = () => {
 
   return (
     <form
-      className="bg-very-light-gray dark:bg-very-dark-desaturated-blue w-[92vw] max-w-md flex mb-4 items-center gap-x-2 p-2.5 rounded-lg justify-between"
+      className="bg-very-light-gray dark:bg-very-dark-desaturated-blue w-[92vw] max-w-full flex mb-4 xl:mb-6 items-center gap-x-2 p-2.5 lg:p-3.5 rounded-lg justify-between"
       onSubmit={onFormSubmit}
     >
       <InputTodo onInputChange={onInputChange} inputValue={inputValue} />
       <button
         type="submit"
 				title="Add"
-        className="bg-dark-grayish-blue dark:bg-very-dark-grayish-blue text-very-light-grayish-blue text-sm p-1 rounded-lg"
+        className="bg-dark-grayish-blue dark:bg-very-dark-grayish-blue text-very-light-grayish-blue text-sm p-1 lg:text-2xl rounded-lg"
       >
         <svg
           stroke="currentColor"

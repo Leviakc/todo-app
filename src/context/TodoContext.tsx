@@ -7,6 +7,8 @@ handleNewTodo: (todo: Todo) => void
 handleDeleteTodo: ({ id }: TodoId) => void
 // handleToggleTodo: ({ id}: TodoId) => void
 handleToggleTodo: (id: string, completed: boolean) => void;
+handleReOrder: (todos: Todo[]) => void
+handleDeleteCompleted: () => void
 todosCount: number
 pendingTodosCount: number
 }

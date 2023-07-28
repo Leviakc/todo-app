@@ -33,13 +33,16 @@ export const TodoItem = ({
 
   return (
     <li
-      className={`bg-very-light-gray dark:bg-very-dark-desaturated-blue w-[92vw] max-w-full flex items-center gap-x-2 p-2.5 lg:p-3.5 justify-between border-light-grayish-blue border-solid border-b cursor-grab [&>button]:opacity-0 [&>button]:hover:opacity-100`}
+      className={`bg-very-light-gray dark:bg-very-dark-desaturated-blue w-[92vw] max-w-full flex items-center gap-x-2 p-2.5 lg:p-3.5 justify-between border-light-grayish-blue border-solid border-b cursor-grab [&>button]:sm:opacity-0 [&>button]:hover:opacity-100 [&>button]:opacity-100`}
       key={id}
       onDragStart={() => (dragItemRef.current = index)}
       onDragEnter={() => (dragOverItemRef.current = index)}
       onDragEnd={handleSort}
       onDragOver={(e) => e.preventDefault()}
-      draggable
+			onTouchStart={() => dragItemRef.current = index}
+			onTouchMove={()=> dragOverItemRef.current = index}
+			onTouchEnd={handleSort}
+      draggable='true'
     >
       <input
         className={`dark:bg-very-dark-desaturated-blue bg-very-light-gray w-[20px]  lg:w-[26px] h-auto aspect-square rounded-full cursor-pointer appearance-none border-dark-grayish-blue dark:border-very-light-grayish-blue-alpha  ${

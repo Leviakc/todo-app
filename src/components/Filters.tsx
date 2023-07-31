@@ -4,7 +4,7 @@ export const Filters = () => {
   const { setActiveFilter, activeFilter } = useTodos();
   return (
     <>
-      <div className="flex justify-self-end justify-between">
+      <div className="flex justify-self-end justify-between gap-x-6">
         <button
           onClick={() => setActiveFilter("all")}
           className={`hover:text-very-dark-grayish-blue hover:dark:text-light-grayish-blue ${

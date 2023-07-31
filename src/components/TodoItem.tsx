@@ -21,7 +21,7 @@ export const TodoItem = ({
   const [isDragging, setIsDragging] = useState(false);
 
 const handleSort = () => {
-    const newTodos = [...todos];
+    const newTodos = structuredClone(todos)
 
     if (dragItemRef.current === null) return;
     const [draggedItem] = newTodos.splice(dragItemRef.current, 1);
@@ -109,7 +109,7 @@ const handleTouchEnd = () => {
       >
         {todo.title}
       </span>
-      <button className="" onClick={() => handleDeleteTodo({ id })}>
+      <button className="" onClick={() => handleDeleteTodo(id)}>
         <img
           src="../../images/icon-cross.svg"
           alt="delete list"

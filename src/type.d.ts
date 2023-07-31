@@ -6,8 +6,14 @@ export interface Todo {
   completed: boolean;
 }
 
-export type TodoId = Pick<Todo, "id">;
-export type TodoCompleted = Pick<Todo, "completed">;
+export interface Todos {
+  Todos: Todo[];
+}
+
+// export type TodoId = Pick<Todo, "id">;
+// export type TodoCompleted = Pick<Todo, "completed">;
+export type TodoId = Todo.id;
+export type TodoCompleted = Todo.completed;
 
 export type ActionOptions =
   | { type: ACTION_TYPES.ADD; payload: Todo }

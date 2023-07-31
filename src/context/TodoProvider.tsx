@@ -2,7 +2,7 @@ import { useEffect, useReducer, useState } from "react";
 import { TodoContext } from "./TodoContext";
 import { todoReducer } from "../helpers/todoReducer";
 import { ACTION_TYPES } from "../consts";
-import { FilterValue, Todo, TodoId } from "../type";
+import { FilterValue, Todo, TodoCompleted, TodoId, Todos } from "../type";
 
 interface TodoProviderProps {
   children: React.ReactNode;
@@ -50,14 +50,14 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
     dispatch(action);
   };
 
-  const handleToggleTodo = (id: string, completed: boolean) => {
+  const handleToggleTodo = (id: TodoId, completed: TodoCompleted) => {
     dispatch({
       type: ACTION_TYPES.TOGGLE,
       payload: { id, completed },
     });
   };
 
-  const handleReOrder = (todos: Todo[]) => {
+  const handleReOrder = (todos: Todos) => {
     dispatch({
       type: ACTION_TYPES.RE_ORDER_TODOS,
       payload: todos,

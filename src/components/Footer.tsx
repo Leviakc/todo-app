@@ -15,7 +15,7 @@ export const Footer = () => {
 					<div className="lg:block hidden">
 					<Filters/>
 					</div>
-				<button type="button" onClick={()=>{handleDeleteCompleted()}} className="text-dark-grayish-blue hover:text-very-dark-grayish-blue dark:text-very-dark-grayish-blue hover:dark:text-light-grayish-blue justify-self-end">Delete completed</button>
+				<button type="button" onClick={()=>{handleDeleteCompleted()}} className="text-dark-grayish-blue hover:text-very-dark-grayish-blue dark:text-dark-grayish-blue hover:dark:text-light-grayish-blue justify-self-end">Delete completed</button>
 				</div>
 
 				<div className="bg-very-light-gray dark:bg-very-dark-desaturated-blue w-[92vw] max-w-md gap-x-2 p-2.5 dark:text-very-light-grayish-blue rounded-b-lg mb-10 lg:hidden flex justify-center">

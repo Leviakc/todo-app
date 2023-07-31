@@ -1,12 +1,12 @@
 import { createContext } from "react";
-import { FilterValue, Todo,  TodoId } from "../type";
+import { FilterValue, Todo,  TodoId, Todos } from "../type";
 
 type TodoContextType = {
 todos: Todo[]
 handleNewTodo: (todo: Todo) => void
-handleDeleteTodo: ({ id }: TodoId) => void
+handleDeleteTodo: (id: TodoId) => void
 handleToggleTodo: (id: string, completed: boolean) => void;
-handleReOrder: (todos: Todo[]) => void
+handleReOrder: (todos: Todos) => void
 handleDeleteCompleted: () => void
 activeFilter: FilterValue
 todosCount: number

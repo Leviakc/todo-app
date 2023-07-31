@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { useTodos } from "../hooks/useTodo";
 import { Todo } from "../type";
 
@@ -20,8 +20,8 @@ export const TodoItem = ({
   const { id, completed } = todo;
   const [isDragging, setIsDragging] = useState(false);
 
-const handleSort = () => {
-    const newTodos = structuredClone(todos)
+  const handleSort = () => {
+    const newTodos = structuredClone(todos);
 
     if (dragItemRef.current === null) return;
     const [draggedItem] = newTodos.splice(dragItemRef.current, 1);
@@ -52,13 +52,13 @@ const handleSort = () => {
     handleSort();
   };
 
-// Touch event handlers for mobile drag and drop
+  // Touch event handlers for mobile drag and drop
   const handleTouchStart = () => {
     setIsDragging(true);
     dragItemRef.current = index;
   };
 
-const handleTouchMove: React.TouchEventHandler<HTMLLIElement> = (e ) => {
+  const handleTouchMove: React.TouchEventHandler<HTMLLIElement> = (e) => {
     if (!isDragging) return;
     e.preventDefault();
     // Determine the current hovered item based on touch position
@@ -74,47 +74,47 @@ const handleTouchMove: React.TouchEventHandler<HTMLLIElement> = (e ) => {
     }
   };
 
-const handleTouchEnd = () => {
+  const handleTouchEnd = () => {
     setIsDragging(false);
     handleSort();
   };
 
-
   return (
     <li
-      className={`bg-very-light-gray dark:bg-very-dark-desaturated-blue w-[92vw] max-w-full flex items-center gap-x-2 p-2.5 lg:p-3.5 justify-between border-light-grayish-blue border-solid border-b cursor-grab [&>button]:sm:opacity-0 [&>button]:hover:opacity-100 [&>button]:opacity-100 ${ isDragging ? "border-dark-grayish-blue" : "border-light-grayish-blue" }`}
+      className={`bg-very-light-gray dark:bg-very-dark-desaturated-blue w-[92vw] max-w-full flex items-center gap-x-2 p-2.5 lg:p-3.5 justify-between border-light-grayish-blue border-solid border-b cursor-grab [&>button]:sm:opacity-0 [&>button]:hover:opacity-100 [&>button]:opacity-100 ${
+        isDragging ? "border-dark-grayish-blue" : "border-light-grayish-blue"
+      }`}
       onDragStart={handleDragStart}
       onDragEnter={handleDragEnter}
       onDragEnd={handleDragEnd}
- onTouchStart={handleTouchStart}
+      onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       draggable="true"
     >
-      <input
-        className={`dark:bg-very-dark-desaturated-blue bg-very-light-gray w-[20px]  lg:w-[26px] h-auto aspect-square rounded-full cursor-pointer appearance-none border-dark-grayish-blue dark:border-very-light-grayish-blue-alpha  ${
-          completed
-            ? "bg-center border-0 bg-checked bg-no-repeat bg-contain"
-            : "border-[1px]"
-        } `}
-        type="checkbox"
-        onChange={(e) => handleToggleTodo(id, e.target.checked)}
-      />
-      <span
-        className={`${
-          completed
-            ? "text-dark-grayish-blue line-through"
-            : "text-very-dark-grayish-blue dark:text-very-light-grayish-blue"
-        }`}
-      >
-        {todo.title}
-      </span>
-      <button className="" onClick={() => handleDeleteTodo(id)}>
-        <img
-          src="../../images/icon-cross.svg"
-          alt="delete list"
-          className="stroke-blue-200"
+      <div className="flex gap-x-3">
+        <input
+          className={`dark:bg-very-dark-desaturated-blue bg-very-light-gray w-[26px] lg:w-[28px] h-auto aspect-square rounded-full cursor-pointer appearance-none border-dark-grayish-blue dark:border-very-light-grayish-blue-alpha  ${
+            completed
+              ? "bg-center border-0 bg-checked bg-no-repeat bg-contain"
+              : "border-[1px]"
+          } `}
+          type="checkbox"
+          onChange={(e) => handleToggleTodo(id, e.target.checked)}
         />
+        <span
+          className={`${
+            completed
+              ? "text-dark-grayish-blue line-through"
+              : "text-very-dark-grayish-blue dark:text-very-light-grayish-blue"
+          }`}
+        >
+          {todo.title}
+        </span>
+      </div>
+
+      <button className="" onClick={() => handleDeleteTodo(id)}>
+        <img src="../../images/icon-cross.svg" alt="delete list" />
       </button>
     </li>
   );

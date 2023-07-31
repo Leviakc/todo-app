@@ -27,7 +27,7 @@ export const CreateTodo = () => {
 
   return (
     <form
-      className="bg-very-light-gray dark:bg-very-dark-desaturated-blue w-[92vw] max-w-full flex mb-4 xl:mb-6 items-center gap-x-2 p-2.5 lg:p-3.5 rounded-lg justify-between"
+      className="bg-very-light-gray dark:bg-very-dark-desaturated-blue w-[92vw] max-w-full flex mb-4 xl:mb-6 items-center gap-x-2 p-3 lg:p-3.5 rounded-lg justify-between"
       onSubmit={onFormSubmit}
     >
       <InputTodo onInputChange={onInputChange} inputValue={inputValue} />

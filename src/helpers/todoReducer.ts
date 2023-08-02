@@ -1,26 +1,34 @@
-import { ActionOptions, Todo } from "../type";
-import { ACTION_TYPES } from "../consts";
+import { ActionOptions, Todos } from "../type";
 
 export const todoReducer = (
-  initialState: Todo[],
+  initialState: Todos,
   action: ActionOptions,
-): Todo[] => {
-  switch (action.type) {
-    case ACTION_TYPES.ADD:
-      return [...initialState, action.payload];
-    case ACTION_TYPES.REMOVE:
-      return initialState.filter((todo) => todo.id !== action.payload.id);
-    case ACTION_TYPES.REMOVE_COMPLETED:
-      return initialState.filter((todo) => !todo.completed);
-    case ACTION_TYPES.TOGGLE: {
-      const { id, completed } = action.payload;
-      return initialState.map((todo) =>
-        todo.id === id ? { ...todo, completed } : todo,
-      );
-    }
-    case ACTION_TYPES.RE_ORDER_TODOS:
-      return action.payload;
-    default:
-      return initialState;
+): Todos => {
+  if (action.type === "ADD") {
+    const { todo } = action.payload;
+    return [...initialState, todo];
   }
+
+  if (action.type === "REMOVE") {
+    const { id } = action.payload;
+    return initialState.filter((todo) => todo.id !== id);
+  }
+
+  if (action.type === "TOGGLE") {
+    const { id, completed } = action.payload;
+    return initialState.map((todo) => {
+      return todo.id === id ? { ...todo, completed } : todo;
+    });
+  }
+
+  if (action.type === "REORDER_TODOS") {
+    const { todos } = action.payload;
+    return todos;
+  }
+
+  if (action.type === "REMOVE_COMPLETED") {
+    return initialState.filter((todo) => !todo.completed);
+  }
+
+  return initialState;
 };

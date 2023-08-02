@@ -50,5 +50,3 @@ export const CreateTodo = () => {
     </form>
   );
 };
-
-// onKeyDown={handleKeyDown}

@@ -1,7 +1,6 @@
 import { useEffect, useReducer, useState } from "react";
 import { TodoContext } from "./TodoContext";
 import { todoReducer } from "../helpers/todoReducer";
-import { ACTION_TYPES } from "../consts";
 import { FilterValue, Todo, TodoCompleted, TodoId, Todos } from "../type";
 
 interface TodoProviderProps {
@@ -35,42 +34,32 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
   }, [activeFilter, todos]);
 
   const handleNewTodo = (todo: Todo) => {
-    const action = {
-      type: ACTION_TYPES.ADD,
-      payload: todo,
-    };
-    dispatch(action);
+    dispatch({ type: "ADD", payload: { todo } });
   };
 
   const handleDeleteTodo = (id: TodoId) => {
-    const action = {
-      type: ACTION_TYPES.REMOVE,
-      payload: id,
-    };
-    dispatch(action);
+    dispatch({ type: "REMOVE", payload: { id } });
   };
 
   const handleToggleTodo = (id: TodoId, completed: TodoCompleted) => {
     dispatch({
-      type: ACTION_TYPES.TOGGLE,
+      type: "TOGGLE",
       payload: { id, completed },
     });
   };
 
   const handleReOrder = (todos: Todos) => {
     dispatch({
-      type: ACTION_TYPES.RE_ORDER_TODOS,
-      payload: todos,
+      type: "REORDER_TODOS",
+      payload: { todos },
     });
   };
 
   const handleDeleteCompleted = () => {
     dispatch({
-      type: ACTION_TYPES.REMOVE_COMPLETED,
+      type: "REMOVE_COMPLETED",
     });
   };
-
-  const todosCount = todos.length;
 
   const pendingTodosCount = todos.filter((todo) => !todo.completed).length;
 
@@ -82,10 +71,9 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
         handleToggleTodo,
         handleDeleteCompleted,
         handleReOrder,
-        todosCount,
         pendingTodosCount,
         todos,
-				activeFilter,
+        activeFilter,
         setActiveFilter,
         filteredTodos,
       }}
